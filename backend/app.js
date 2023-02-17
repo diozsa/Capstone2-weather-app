@@ -1,6 +1,6 @@
 "use strict";
 
-/** Express app for jobly. */
+/** Express app for weather app. */
 
 const express = require("express");
 const cors = require("cors");
@@ -21,7 +21,7 @@ app.use(authenticateJWT);
 
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
-//app.use("/locations", locationsRoutes);
+//app.use("/addresses", addressesRoutes);
 
 
 /** Handle 404 errors -- this matches everything */

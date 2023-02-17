@@ -3,9 +3,9 @@ CREATE TABLE users (
   password TEXT NOT NULL
 );
 
-CREATE TABLE locations (
+CREATE TABLE addresses (
   id SERIAL PRIMARY KEY,
-  location TEXT NOT NULL,
+  address TEXT NOT NULL,
   username VARCHAR(30)
     REFERENCES users ON DELETE CASCADE
 );
