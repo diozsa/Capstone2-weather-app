@@ -51,7 +51,7 @@ router.post("/register", async function (req, res, next) {
     const validator = jsonschema.validate(req.body, userSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
+      throw new BadRequestError("Password does not meet minimum length of 5", errs);
     }
 
     const newUser = await User.register({ ...req.body });

@@ -6,7 +6,7 @@ CREATE DATABASE weather;
 \connect weather
 
 \i weather-schema.sql
--- \i weather-seed.sql
+\i weather-seed.sql
 
 \echo 'Delete and recreate weather_test db?'
 \prompt 'Return for yes or control-C to cancel > ' foo
