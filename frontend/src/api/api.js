@@ -9,7 +9,7 @@ class WeatherApi {
   static token;
 
   static async request(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", endpoint, data, method);
+    console.debug("API Call:", BASE_URL, endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${WeatherApi.token}` };
@@ -51,6 +51,18 @@ class WeatherApi {
 
     return res.addresses;
   }
+
+  /** Fetch data from the external API */
+
+  static async getWeatherData(location) {
+    
+    const res = await this.request(`api/data?location=${location}`);
+    // const res = await axios.get(`api/data`);
+    console.log("Location in WeatherApi is ",location);
+    console.log("Result from external API is ", res);
+    return res;
+  }
+
 }
 
 // Token for username "user", password "password"
@@ -60,13 +72,3 @@ class WeatherApi {
 
 
 export default WeatherApi;
-
-//this could run outside of the class
-//retrieving the external API results from backend
-// getHours, getDays, getUnits
-
-// export const getDays = async () => {
-//   const res = await axios.get(`${BASE_URL}/****/`)
-
-//   return res.data
-// }

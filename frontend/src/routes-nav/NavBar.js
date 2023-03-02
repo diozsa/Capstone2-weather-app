@@ -2,6 +2,9 @@ import React, {useContext, useState, useEffect} from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Modal from "react-bootstrap/Modal"
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 // import LoginForm from "../auth/LoginForm";
 import LoginSignupForm from "../auth/LoginSignupForm";
 import UserContext from "../auth/UserContext";
@@ -15,15 +18,12 @@ import SearchForm from "../common/SearchForm";
  * Rendered by App.
  */
 
-const NavBar = ({logout, login, signup}) => {
+const NavBar = ({logout, login, signup, search}) => {
   const { currentUser } = useContext(UserContext);
   console.debug("Navigation", "currentUser=", currentUser);
 
   const [showModal, setShowModal] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(true);
-
-
-
 
   // set Modal to false after login
   useEffect(() => {
@@ -32,16 +32,18 @@ const NavBar = ({logout, login, signup}) => {
     }
   }, [currentUser]);
 
+  // toggle Modal to show/hide
   const toggleModal = () => {
     setShowModal(!showModal);
     // setIsLoginMode(!isLoginMode); /////
   };
 
-  // switches between Login and Signup
+  // switch between Login and Signup
   const toggleLoginMode = () => {
     setIsLoginMode(!isLoginMode);
   }
 
+  // Shows links for logged in user
   function loggedInNav() {
     return (
       <>
@@ -55,6 +57,7 @@ const NavBar = ({logout, login, signup}) => {
     );
   }
 
+  // Shows links for logged out user
   function loggedOutNav() {
     return (
       <>
@@ -83,17 +86,27 @@ const NavBar = ({logout, login, signup}) => {
       </>
     );
   }
+
   return (
     <Navbar style={{ backgroundColor: 'lightBlue', height: '70px' }}
       variant="light" className="justify-content-between px-5">
-      <div className="d-flex align-items-center">
-        <Navbar.Brand>Weather Forecast</Navbar.Brand>
-        <SearchForm />
-      </div>
-        <Nav >
-          {currentUser ? loggedInNav() : loggedOutNav()}
-        </Nav>
+      {/* <Container> */}
+        {/* <div className="d-flex justify-content-between"> */}
+          {/* <Col className="mr-auto"> */}
 
+    <div className=" d-flex align-items-center">
+        <Navbar.Brand>Weather Forecast</Navbar.Brand>
+        <SearchForm searchFor={search} />
+            </div>
+
+          {/* </Col>
+          <Col > */}
+            <Nav className="justify-content-end">
+          {currentUser ? loggedInNav() : loggedOutNav()}
+            </Nav>
+          {/* </Col> */}
+        {/* </div> */}
+      {/* </Container> */}
     </Navbar>
 
   )

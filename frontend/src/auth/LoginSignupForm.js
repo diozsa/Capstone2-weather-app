@@ -13,7 +13,7 @@ import Button from "react-bootstrap/Button";
 
  */
 
-const LoginSignupForm = ({ login, signup, isLoginMode, toggleModal, toggleLoginMode }) => {
+const LoginSignupForm = ({ login, signup, isLoginMode, toggleLoginMode }) => {
 
   const initialValues = {
     username: '',
@@ -58,6 +58,7 @@ const LoginSignupForm = ({ login, signup, isLoginMode, toggleModal, toggleLoginM
             name="username"
             value={formData.username}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -68,6 +69,7 @@ const LoginSignupForm = ({ login, signup, isLoginMode, toggleModal, toggleLoginM
             name="password"
             value={formData.password}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 

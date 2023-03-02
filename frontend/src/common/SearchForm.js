@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from 'react-bootstrap/Button';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 /** Search widget.
  *
@@ -31,19 +33,23 @@ const SearchForm = ({ searchFor}) => {
 
   return (
     // <div className='mt-5 col-md-5 mx-auto'>
-      <Form onSubmit={handleSubmit}>
-        <InputGroup className="mb-auto">
-          <Form.Control
-            placeholder="Search for a city, address or zip code"
-            type="text"
-            name="searchTerm"
-            value={searchTerm}
-            onChange={handleChange}
-          />
+    <Form onSubmit={handleSubmit}>
+        {/* <Col md={6} lg={12}> */}
+        <InputGroup>
+        <Form.Control
+          style={{ width: "400px" }}
+          placeholder="Search for a city, address or zip code"
+          type="text"
+          name="searchTerm"
+          value={searchTerm}
+          onChange={handleChange}
+          required
+        />
           <Button type="submit" variant="outline-secondary" id="search-button">
-            Search Location
+            Search
           </Button>
-        </InputGroup>
+          </InputGroup>
+        {/* </Col> */}
       </Form>
     // </div>
   );

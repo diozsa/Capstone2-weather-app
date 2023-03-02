@@ -3,15 +3,32 @@
 /** Routes for addresses. */
 
 const jsonschema = require("jsonschema");
-
 const express = require("express");
 const { BadRequestError } = require("../expressError");
 const { ensureCorrectUser, ensureLoggedIn } = require("../middleware/auth");
 const Address = require("../models/address");
 const addressSchema = require("../schemas/address.json");
-
 const router = express.Router();
 
+
+/** GET / {data} => {processed_data}
+ * 
+ * Gets data from external weather API
+ * 
+ * NO autho required
+ */
+
+// router.get('/data', async function (req, res, next) {
+//   try {
+//     const response = await axios.get(`${API_BASE_URL}${API_KEY}`);
+//     const data = response.data; // the response data from the API
+//     let { currentConditions } = data;
+
+//     res.send(currentConditions); // send the response data to the client 
+//   } catch (err) {
+//     return next(err);
+//   }
+// })
 
 /** POST / Add location data { location } => { location }
  *

@@ -13,21 +13,19 @@ import { decodeToken } from "react-jwt";
  * - infoLoaded: has user data been pulled from API?
  *   (this manages spinner for "loading...")
  * 
- * - currentUser: user obj from API. This becomes the canonical way to tell
+ * - currentUser: username - from token. This becomes the canonical way to tell
  *   if someone is logged in. This is passed around via context throughout app.
  */
 
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "weather-token";
 
-
-
-
 function App() {
   const [infoLoaded, setInfoLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
-
+  const [weatherData, setWeatherData] = useState(null);
+  const [address, setAddress] = useState("");
 
   // Gets username from token. Until a user is logged in and they have a token,
   // this should not run. It only needs to re-run when a user logs out, so
@@ -98,14 +96,32 @@ function App() {
       return { success: false, errors };
     }
   }
+  
+  /** Load data for default location on mount */
+  /** Could implement IP geo detection for default */
+  // useEffect(function getLocationOnMount() {
+  //   search();
+  // }, []);
+
+  async function search(location) {
+    try {
+      let data = await WeatherApi.getWeatherData(location);
+      setWeatherData(data);
+      // console.log(location);
+    } catch (errors) {
+      console.error("api failed", errors);
+      return { success: false, errors };
+    }
+ 
+  }
 
   if (!infoLoaded) return <LoadingSpinner />;
 
   return (
     <Router>
       <UserContext.Provider
-        value={{ currentUser, setCurrentUser }}>
-        <NavBar logout={logout} login={login} signup={signup} />
+        value={{ currentUser, setCurrentUser, weatherData, setWeatherData }}>
+        <NavBar logout={logout} login={login} signup={signup} search={search} />
 
       </UserContext.Provider>
     </Router>

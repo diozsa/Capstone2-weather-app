@@ -13,6 +13,9 @@ const SECRET_KEY = process.env.SECRET_KEY || "secret-dev";
 // const { SECRET_key } = require("../secrets");
 // const SECRET_KEY = process.env.SECRET_KEY || SECRET_key;
 
+const { API_key } = require("../secrets");
+const API_KEY = process.env.API_KEY || API_key;
+
 const PORT = +process.env.PORT || 3001;
 
 // Use dev database, testing database, or via env var, production database
@@ -35,6 +38,7 @@ console.log("Database:".yellow, getDatabaseUri());
 console.log("---");
 
 module.exports = {
+  API_KEY,
   SECRET_KEY,
   PORT,
   BCRYPT_WORK_FACTOR,
