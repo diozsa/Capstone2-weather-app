@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import useLocalStorage from "./hooks/useLocalStorage";
 import Container from "react-bootstrap/Container";
 import WeatherApi from "./api/api";
 import NavBar from "./routes-nav/NavBar";
+import HomePage from "./routes-nav/HomePage";
+
 // import "./App.css";
 import UserContext from "./auth/UserContext";
 import LoadingSpinner from "./common/LoadingSpinner";
 import { decodeToken } from "react-jwt";
+import getGeoLocation from "./helper/getGeoLocation";
 
 /**
  * - infoLoaded: has user data been pulled from API?
@@ -98,16 +101,29 @@ function App() {
   }
   
   /** Load data for default location on mount */
-  /** Could implement IP geo detection for default */
-  // useEffect(function getLocationOnMount() {
-  //   search();
-  // }, []);
+  /** Using IP geo detection for default - IF NO BROWSER BLOCKER PRESENT*/
+
+  useEffect(() => {
+    async function getLocationOnMount() {
+      try {
+        const location = await getGeoLocation();
+        await search(location);
+      } catch (error) {
+        console.log("Geolocation error:", error);
+        await search("Delhi");
+      }
+    }
+    getLocationOnMount();
+  }, []);
+
+// Search function used in the SearchForm
 
   async function search(location) {
     try {
       let data = await WeatherApi.getWeatherData(location);
       setWeatherData(data);
-      // console.log(location);
+      console.log("Weather data in App", data)
+      return { success: true };
     } catch (errors) {
       console.error("api failed", errors);
       return { success: false, errors };
@@ -122,7 +138,12 @@ function App() {
       <UserContext.Provider
         value={{ currentUser, setCurrentUser, weatherData, setWeatherData }}>
         <NavBar logout={logout} login={login} signup={signup} search={search} />
-
+        <Container>
+          <Routes>
+            <Route path="/" element={<HomePage weatherData={weatherData} />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Container>
       </UserContext.Provider>
     </Router>
   );
