@@ -95,7 +95,7 @@ const NavBar = ({logout, login, signup, search}) => {
           {/* <Col className="mr-auto"> */}
 
     <div className=" d-flex align-items-center">
-        <Navbar.Brand>Weather Forecast</Navbar.Brand>
+        <Navbar.Brand className="d-none d-sm-block">Weather Forecast</Navbar.Brand>
         <SearchForm searchFor={search} />
             </div>
 

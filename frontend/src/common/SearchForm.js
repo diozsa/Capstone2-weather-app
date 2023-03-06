@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import FormGroup from "react-bootstrap/FormGroup";
+
 import Button from 'react-bootstrap/Button';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -48,16 +50,18 @@ const SearchForm = ({ searchFor}) => {
     // <div className="d-flex flex-grow-1 justify-content-center align-items-center">
     <>
     <Form onSubmit={handleSubmit}>
-      {/* <Col md={6} lg={12}> */}
-      <InputGroup>
+        {/* <Col md={6} lg={12}> */}
+        <Form.Group className="d-flex align-items-center">
         <Form.Control
-          style={{ width: "400px" }}
+          // style={{ width: "400px" }}
           placeholder="Search for a city, address or zip code"
           type="text"
           name="searchTerm"
           value={searchTerm}
           onChange={handleChange}
-          required
+            required
+            style={{ minWidth: "300px", width: "100%" }}
+            className="form-control-md"
         />
         <Button
           type="submit"
@@ -66,16 +70,19 @@ const SearchForm = ({ searchFor}) => {
           style={{ marginRight: "10px" }}
         >
           Search
-        </Button>
-      </InputGroup>
-      {/* </Col> */}
-
+          </Button>
+        </Form.Group>
+        {/* </Col> */}
     </Form>
+
+      {/* 
+  /** error - not found alert     
       {
     formErrors.length
     ? <Message type="danger" messages={formErrors} />
     : null
-  }
+  } */}
+  
     </>
     // </div>
   );

@@ -1,10 +1,11 @@
 import React from "react";
-import HeaderComp from "../Components/HeaderComp";
+import Header from "../Components/Header";
+import Stats from "../Components/Stats";
 const HomePage = () => {
   return(
     <>
-      <HeaderComp />
-      
+      <Header />
+      <Stats/>
       
     </>
   )

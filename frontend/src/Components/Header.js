@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import UserContext from "../auth/UserContext";
-const HeaderComp = () => {
+const Header = () => {
   const { weatherData } = useContext(UserContext);
   if (!weatherData) {
-    return <p>Location not found</p>;
+    return <p className="lead">Location not found. Try another!</p>;
   }
   return (
     <>
@@ -13,4 +13,4 @@ const HeaderComp = () => {
   )
 }
 
-export default HeaderComp;
+export default Header;

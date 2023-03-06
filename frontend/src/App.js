@@ -112,7 +112,9 @@ function App() {
         console.log("Geolocation error:", error);
         await search("Delhi");
       }
+      setInfoLoaded(true);
     }
+    setInfoLoaded(false);
     getLocationOnMount();
   }, []);
 
@@ -126,7 +128,8 @@ function App() {
       return { success: true };
     } catch (errors) {
       console.error("api failed", errors);
-      return { success: false, errors };
+      // return { success: false, errors };
+      return setWeatherData(null);
     }
  
   }
@@ -148,5 +151,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
