@@ -12,7 +12,10 @@ const CurrentCard = ({time}) => {
   const icon = weatherData.currentConditions.icon;
 
   return (
-    <Card border="info" style={{ width: '70%', maxWidth: '400px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Card
+      className="border-info border-2 shadow w-80 max-w-400 m-4 d-flex align-items-center justify-content-center bg-secondary bg-opacity-10"
+    // style={{ width: '80%', maxWidth: '400px', margin: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
       <Row>
         <Col xs={4} className="d-flex flex-column align-items-center justify-content-center"
         style ={{maxWidth:"60%"}}>
@@ -25,14 +28,16 @@ const CurrentCard = ({time}) => {
         <Col className="d-flex flex-column align-items-center justify-content-center" style={{ width: "60%" }}>
 
           <Card.Body style={{ textAlign: 'center'}}>
-            <Card.Title>Currently</Card.Title>
-            <Card.Text style={{ fontSize: '20px' }}>
+            <Card.Title className="fw-bold text-muted" style={{ fontSize: '24px' }}>
+              Current stats
+            </Card.Title>
+            <Card.Text className="fs-5">
               {weatherData.currentConditions.conditions}
             </Card.Text>
-            <Card.Text style={{fontSize:'20px'}}>
+            <Card.Text className="fs-5">
               Feels like {Math.round(weatherData.currentConditions.feelslike) + "\xB0F"}
             </Card.Text>
-            <Card.Text style={{ fontSize: '15px' }}>
+            <Card.Text className="text-muted fs-6" >
               (as of {time})
             </Card.Text>
           </Card.Body>

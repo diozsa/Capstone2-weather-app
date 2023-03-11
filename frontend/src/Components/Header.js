@@ -1,14 +1,25 @@
 import React, { useContext } from "react";
 import UserContext from "../auth/UserContext";
+import Alert from "react-bootstrap/Alert"
 const Header = () => {
   const { weatherData } = useContext(UserContext);
   if (!weatherData) {
     return <p className="lead">Location not found. Try another!</p>;
   }
+
   return (
     <>
-      <h1 className="display-6">{weatherData.resolvedAddress}</h1>
-      <p className="lead">{weatherData.description}</p>
+      <h1 className="display-6 mt-3">{weatherData.resolvedAddress}</h1>
+      <p className="lead fs-4">{weatherData.description}</p>
+      {
+        weatherData.alert.link
+          ? <Alert variant="danger">
+            Weather Alert - {weatherData.alert.event}. &nbsp;&nbsp;
+            <a href={weatherData.alert.link} target="_blank">
+              More information here</a>
+            </Alert>
+          : null
+      }
     </>
   )
 }

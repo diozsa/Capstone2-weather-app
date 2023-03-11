@@ -21,5 +21,12 @@ export default
   "thunder-showers-day": require("./thunder-showers-day.png"),
   "thunder-showers-night": require("./thunder-showers-night.png"),
   "thunder": require("./thunder.png"),
-  "wind": require("./wind.png")  
+  "wind": require("./wind1.png"),
+  "min-temp": require("./min-temp.png"),
+  "max-temp": require("./max-temp.png"),
+  "sunrise": require("./sunrise.png"),
+  "sunset": require("./sunset.png"),
+  "visibility": require("./visibility.png"),
+  "humidity": require("./humidity.png"),
+  "uv": require("./uv.png"),
 }

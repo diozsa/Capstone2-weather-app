@@ -60,9 +60,10 @@ function repackageData(data) {
 
 router.get('/data', async function (req, res, next) {
   const location = req.query.location;
+  const unitGroup = req.query.unit; // metric or US
   console.log("THE QUERY IS ", req.query)
   try {
-    const response = await axios.get(`${API_BASE_URL}${location}?key=${API_KEY}`);
+    const response = await axios.get(`${API_BASE_URL}${location}?unitGroup=${unitGroup}&key=${API_KEY}`);
     const data = response.data;
 
     console.log("Location in Express is ", location)

@@ -6,7 +6,9 @@ const HomePage = () => {
   return(
     <>
       <Header />
-      <Stats/>
+      <Stats />
+      <p className="lead fs-5 d-flex justify-content-center my-3">Hourly Forecast</p>
+
       
     </>
   )

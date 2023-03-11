@@ -54,9 +54,9 @@ class WeatherApi {
 
   /** Fetch data from the external API */
 
-  static async getWeatherData(location) {
+  static async getWeatherData(location, unit="us") {
     
-    const res = await this.request(`api/data?location=${location}`);
+    const res = await this.request(`api/data?location=${location}&unit=${unit}`);
     console.log("Location in WeatherApi is ",location);
     console.log("Result from external API is ", res);
     return res;
