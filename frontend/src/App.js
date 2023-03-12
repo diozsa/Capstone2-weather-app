@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import useLocalStorage from "./hooks/useLocalStorage";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import WeatherApi from "./api/api";
 import NavBar from "./routes-nav/NavBar";
 import HomePage from "./routes-nav/HomePage";
@@ -147,6 +149,19 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Container>
+        {/* <Row
+          style={{ backgroundColor: 'lightBlue', height: '50px' }}>
+          <Col className=" d-flex align-items-center">
+            <p>Copyright © 2023 My Website</p>
+          </Col>
+        </Row> */}
+        <Row className="fixed-bottom" style={{ backgroundColor: 'lightBlue' }}>
+          <Col className="d-flex align-items-center justify-content-center">
+            <p className="m-3">
+              Dan Iozsa © 2023 <a href="https://linkedin.com/in/diozsa" target="_blank">LinkedIn</a>
+            </p>
+          </Col>
+        </Row>
       </UserContext.Provider>
     </Router>
   );

@@ -3,12 +3,16 @@ import Card from "react-bootstrap/Card";
 import ListGroup from 'react-bootstrap/ListGroup';
 import icons from "../icons/icons";
 
-const DayCard = ({ icon, conditions, tempMax, tempMin, precip, date }) => {
+const DayCard = ({ icon, tempMax, tempMin, precip, date, onClick, isSelected }) => {
   return (
     <>
       <Card
-        className="me-2 shadow-lg border-0 m-auto d-flex align-items-center justify-content-center"
-        style={{ maxWidth: '200px' }}
+        className={`me-3 shadow-lg m-auto d-flex align-items-center justify-content-center
+          ${isSelected ? " border-primary" : ""}`}
+        style={{ maxWidth: '200px', cursor: 'pointer', transition: 'transform 0.2s ease-in-out' }}
+        onClick={onClick}
+        onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+        onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
       >
         <Card.Img variant="top" src={icons[icon]}
           style={{ maxWidth: '70px' }}

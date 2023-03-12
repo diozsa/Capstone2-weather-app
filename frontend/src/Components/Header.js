@@ -15,7 +15,7 @@ const Header = () => {
         weatherData.alert.link
           ? <Alert variant="danger">
             Weather Alert - {weatherData.alert.event}. &nbsp;&nbsp;
-            <a href={weatherData.alert.link} target="_blank">
+            <a href={weatherData.alert.link} target="_blank" rel="noopener noreferrer">
               More information here</a>
             </Alert>
           : null

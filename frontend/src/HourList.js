@@ -3,7 +3,7 @@ import UserContext from "../auth/UserContext";
 import HourCard from "./HourCard";
 import Row from "react-bootstrap/Row";
 
-const HourList = ({ formatDateTime, selectedDay }) => {
+const HourList = ({ formatDateTime }) => {
 
   const { weatherData } = useContext(UserContext);
   const dateString = weatherData.days[0].datetime;
@@ -18,8 +18,8 @@ const HourList = ({ formatDateTime, selectedDay }) => {
     // />
 
     <>
-      <Row className="flex-nowrap overflow-auto py-4 mx-3">
-      {weatherData.days[selectedDay].hours.map(hour => {
+      <Row className="flex-nowrap overflow-auto py-4">
+      {weatherData.days[0].hours.map(hour => {
         const time = formatDateTime(hour.datetime, dateString)[0];
 
         return (

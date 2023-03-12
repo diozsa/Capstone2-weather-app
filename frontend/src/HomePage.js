@@ -39,13 +39,10 @@ const HomePage = () => {
           <p className="lead fs-5 d-flex justify-content-center pt-5">
             Hourly forecast -&nbsp;
             {formatDateTime(weatherData.days[0].hours[0].datetime,
-              weatherData.days[selectedDay].datetime)[1]}
+              weatherData.days[0].datetime)[1]}
           </p>
 
-          < HourList
-            formatDateTime={formatDateTime}
-            selectedDay={selectedDay}
-          />
+          < HourList formatDateTime={formatDateTime} />
 
           <p className="lead fs-5 d-flex justify-content-center pt-5">
             Daily forecast -&nbsp;
@@ -54,11 +51,7 @@ const HomePage = () => {
             {formatDateTime(weatherData.days[0].hours[0].datetime, weatherData.days[14].datetime)[1]}
           </p>
 
-          < DayList
-            formatDateTime={formatDateTime}
-            onDayClick={handleDayClick}
-            selectedDay={selectedDay}
-          />
+          < DayList formatDateTime={formatDateTime} />
 
         </>
       ) : null}

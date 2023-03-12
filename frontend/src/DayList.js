@@ -3,19 +3,17 @@ import UserContext from "../auth/UserContext";
 import DayCard from "./DayCard";
 import Row from "react-bootstrap/Row";
 
-const DayList = ({ formatDateTime, onDayClick, selectedDay }) => {
+const DayList = ({ formatDateTime }) => {
 
   const { weatherData } = useContext(UserContext);
-  // const timeString = weatherData.days[0].hours[0].datetime;
+  const timeString = weatherData.days[0].hours[0].datetime;
+  
 
-  const handleDayCardClick = (dayIndex) => {
-    onDayClick(dayIndex);
-  }
   return (
-    <div className="pb-5">
-      <Row className="flex-nowrap overflow-auto py-4 my-5 mx-3">
-        {weatherData.days.map((day, index) => {
-          const date = formatDateTime(weatherData.days[0].hours[0].datetime, day.datetime)[1];
+    <>
+      <Row className="flex-nowrap overflow-auto py-4 my-5">
+        {weatherData.days.map(day => {
+          const date = formatDateTime(timeString, day.datetime)[1];
 
           return (
             <DayCard
@@ -26,13 +24,11 @@ const DayList = ({ formatDateTime, onDayClick, selectedDay }) => {
               tempMin={Math.round(day.tempmin) + "\xB0F"}
               precip={day.precipprob}
               date={date}
-              onClick={() => handleDayCardClick(index)}
-              isSelected={selectedDay === index}
             />
           );
         })}
       </Row>
-    </div>
+    </>
   )
 }
 
