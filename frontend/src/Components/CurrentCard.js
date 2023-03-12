@@ -13,7 +13,8 @@ const CurrentCard = ({time}) => {
 
   return (
     <Card
-      className="border-info border-2 shadow w-80 max-w-400 m-4 d-flex align-items-center justify-content-center bg-secondary bg-opacity-10"
+      className="border-info border-2 shadow max-w-400 m-4 d-flex align-items-center justify-content-center bg-secondary bg-opacity-10"
+      // style={{maxWidth: "350px"}}
     // style={{ width: '80%', maxWidth: '400px', margin: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
       <Row>

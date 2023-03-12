@@ -5,19 +5,30 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import StatCard from "./StatCard";
 
-const Stats = () => {
+const Stats = ({formatDateTime}) => {
+  // original function
 
-  function formatDateTime(weatherData, datetime) {
-    // currentConditions[datetime] is a string like "21:43:30"
-    const currTimeString = weatherData.currentConditions[datetime];
-    // days[0].datetime is a string like "2023-03-08";
-    const currDateString = weatherData.days[0].datetime;
-    const time = new Date(`${currDateString} ${currTimeString}`);
-    const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-    const formattedDate = time.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    let res = [formattedTime, formattedDate];
-    return res;
-  }
+  // function formatDateTime(weatherData, datetime) {
+  //   // currentConditions[datetime] is a string like "21:43:30"
+  //   const currTimeString = weatherData.currentConditions[datetime];
+  //   // days[0].datetime is a string like "2023-03-08";
+  //   const currDateString = weatherData.days[0].datetime;
+  //   const time = new Date(`${currDateString} ${currTimeString}`);
+  //   const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+  //   const formattedDate = time.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  //   let res = [formattedTime, formattedDate];
+  //   return res;
+  // }
+
+  // function formatDateTime(timeString, dateString) {
+  //   // dayString format "21:43:30"
+  //   // days[0].datetime is a string like "2023-03-08";
+  //   const time = new Date(`${dateString} ${timeString}`);
+  //   const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+  //   const formattedDate = time.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  //   let res = [formattedTime, formattedDate];
+  //   return res;
+  // }
 
   function uvIndex(uvindex) {
     switch (true) {
@@ -38,16 +49,22 @@ const Stats = () => {
   const uvindex = weatherData.currentConditions.uvindex;
   let index = uvIndex(uvindex);
 
-  const currTime = formatDateTime(weatherData, "datetime")[0];
-  const sunrise = formatDateTime(weatherData, "sunrise")[0];
-  const sunset = formatDateTime(weatherData, "sunset")[0];
+  // const currTime = formatDateTime(weatherData, "datetime")[0];
+  // const sunrise = formatDateTime(weatherData, "sunrise")[0];
+  // const sunset = formatDateTime(weatherData, "sunset")[0];
+  const dateString = weatherData.days[0].datetime;
+
+  const currTime = formatDateTime(weatherData.currentConditions.datetime, dateString)[0];
+  const sunrise = formatDateTime(weatherData.currentConditions.sunrise, dateString)[0];
+  const sunset = formatDateTime(weatherData.currentConditions.sunset, dateString)[0];
   return (
     <>
       <Row >
         <Col sm={10} lg={6} xl={4}>
           <CurrentCard time={currTime} />
         </Col>
-        <Col className="overflow-auto" style={{ marginTop: "30px" }}>
+        <Col className="overflow-auto" style={{ marginTop: "30px" }}
+        >
           
           <Row className="flex-nowrap">
             <StatCard
@@ -72,7 +89,7 @@ const Stats = () => {
             />
             </Row>
 
-          <Row className="flex-nowrap" style={{ marginTop: "10px" }}>
+          <Row className="flex-nowrap pb-4" style={{ marginTop: "10px" }}>
             <StatCard
               txt="MaxTemp"
               val={Math.round(weatherData.days[0].tempmax) + "\xB0F"}

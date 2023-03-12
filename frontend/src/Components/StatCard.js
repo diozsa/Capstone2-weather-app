@@ -7,14 +7,14 @@ import Col from 'react-bootstrap/Col';
 import icons from "../icons/icons";
 
 const StatCard = ({ txt, val, icon }) => {
-  const { weatherData } = useContext(UserContext);
+  // const { weatherData } = useContext(UserContext);
   // const icon = weatherData.currentConditions.icon;
 
 
   return (
     <Card
       className="shadow border-info m-auto d-flex align-items-center justify-content-center"
-      style={{ minWidth: "210px", maxWidth: '210px', minHeight: "80px", width: '70%' }}
+      style={{ minWidth: "200px", maxWidth: '210px'}}
       // style={{ width: '70%', minHeight: "80px", minWidth: "210px", maxWidth: '210px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
       <Row>

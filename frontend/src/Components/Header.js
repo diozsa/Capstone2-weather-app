@@ -4,13 +4,13 @@ import Alert from "react-bootstrap/Alert"
 const Header = () => {
   const { weatherData } = useContext(UserContext);
   if (!weatherData) {
-    return <p className="lead">Location not found. Try another!</p>;
+    return <p className="lead fs-4 m-4">Location not found. Try another!</p>;
   }
 
   return (
     <>
-      <h1 className="display-6 mt-3">{weatherData.resolvedAddress}</h1>
-      <p className="lead fs-4">{weatherData.description}</p>
+      <h1 className="display-6 m-3">{weatherData.resolvedAddress}</h1>
+      <p className="lead fs-4 m-3">{weatherData.description}</p>
       {
         weatherData.alert.link
           ? <Alert variant="danger">
