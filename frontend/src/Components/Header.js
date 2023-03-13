@@ -13,7 +13,7 @@ const Header = () => {
       <p className="lead fs-4 m-3">{weatherData.description}</p>
       {
         weatherData.alert.link
-          ? <Alert variant="danger">
+          ? <Alert variant="danger" className="ms-3">
             Weather Alert - {weatherData.alert.event}. &nbsp;&nbsp;
             <a href={weatherData.alert.link} target="_blank" rel="noopener noreferrer">
               More information here</a>

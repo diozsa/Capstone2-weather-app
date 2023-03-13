@@ -60,14 +60,13 @@ const SearchForm = ({ searchFor}) => {
           value={searchTerm}
           onChange={handleChange}
             required
-            style={{ minWidth: "300px", width: "100%" }}
+            style={{ minWidth: "290px", width: "100%" }}
             className="form-control-md"
         />
         <Button
           type="submit"
           variant="outline-secondary"
           id="search-button"
-          style={{ marginRight: "10px" }}
         >
           Search
           </Button>

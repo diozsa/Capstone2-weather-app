@@ -43,7 +43,13 @@ class WeatherApi {
     return res.token;
   }
 
+  /** Save location */
 
+  static async save(data) {
+    const res = await this.request('addresses', data, 'post');
+
+    return res.address;
+  }
   /** Get all addresses saved by user */
 
   static async getAddresses(username) {

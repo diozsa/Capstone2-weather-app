@@ -2,13 +2,10 @@ import React, {useContext, useState, useEffect} from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Modal from "react-bootstrap/Modal"
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-// import LoginForm from "../auth/LoginForm";
 import LoginSignupForm from "../auth/LoginSignupForm";
 import UserContext from "../auth/UserContext";
 import SearchForm from "../common/SearchForm";
+import saveIcon from '../icons/pin.png';
 
 /** Navigation bar for site. Shows up on every page.
  *
@@ -18,12 +15,20 @@ import SearchForm from "../common/SearchForm";
  * Rendered by App.
  */
 
-const NavBar = ({logout, login, signup, search}) => {
-  const { currentUser } = useContext(UserContext);
+const NavBar = ({logout, login, signup, search, saveAdd}) => {
+  const { currentUser, address } = useContext(UserContext);
   console.debug("Navigation", "currentUser=", currentUser);
 
   const [showModal, setShowModal] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(true);
+
+
+  const [navModal, setNavModal] = useState(false);
+  const toggleNavModal = () => {
+    setNavModal(!navModal);
+  };
+
+
 
   // set Modal to false after login
   useEffect(() => {
@@ -32,10 +37,9 @@ const NavBar = ({logout, login, signup, search}) => {
     }
   }, [currentUser]);
 
-  // toggle Modal to show/hide
+  // toggles Modal to show/hide Login/Sinaup Form
   const toggleModal = () => {
     setShowModal(!showModal);
-    // setIsLoginMode(!isLoginMode); /////
   };
 
   // switch between Login and Signup
@@ -48,7 +52,9 @@ const NavBar = ({logout, login, signup, search}) => {
     return (
       <>
         
-        <Nav.Link href="/">Saved Locations</Nav.Link>
+        <Nav.Link onClick={() => saveAdd({ username: currentUser, address: address })}>
+          <img src={saveIcon} alt="Save Icon" className=" w-50" />
+        </Nav.Link>
         <Nav.Link onClick={logout}>Log Out</Nav.Link>
         <Nav.Link eventKey="disabled">
           Welcome, {currentUser}
@@ -61,19 +67,22 @@ const NavBar = ({logout, login, signup, search}) => {
   function loggedOutNav() {
     return (
       <>
+        {/* redirecting to login for non-logged in */}
+        <Nav.Link onClick={toggleModal}>
+          <img src={saveIcon} alt="Save Icon" className=" w-50" />
+        </Nav.Link>
+
         <Nav.Link onClick={toggleModal} eventKey="login"
           className="pr-5">Login / Signup</Nav.Link>
 
         <Modal show={showModal} onHide={toggleModal}>
           <Modal.Header closeButton>
-            {/* <Modal.Title>Login</Modal.Title> */}
             <Modal.Title>
               {isLoginMode ? "Log In" : "Sign Up"}
             </Modal.Title>
 
           </Modal.Header>
           <Modal.Body>
-            {/* <LoginForm login={login} /> */}
             <LoginSignupForm
               login={login}
               signup={signup}
@@ -89,24 +98,34 @@ const NavBar = ({logout, login, signup, search}) => {
 
   return (
     <Navbar style={{ backgroundColor: 'lightBlue', height: '70px' }}
-      variant="light" className="justify-content-between px-5">
-      {/* <Container> */}
-        {/* <div className="d-flex justify-content-between"> */}
-          {/* <Col className="mr-auto"> */}
+      variant="light" className="justify-content-between px-5" expand="sm">
 
-    <div className=" d-flex align-items-center">
+      <div className=" d-flex align-items-center">
         <Navbar.Brand className="d-none d-sm-block">Weather Forecast</Navbar.Brand>
         <SearchForm searchFor={search} />
-            </div>
+      </div>
+      
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-          {/* </Col>
-          <Col > */}
-            <Nav className="justify-content-end">
-          {currentUser ? loggedInNav() : loggedOutNav()}
+      <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+
+      <Nav className="justify-content-end">
+        {currentUser ? loggedInNav() : loggedOutNav()}
+      </Nav>
+        
+        
+        <Modal show={navModal} onHide={toggleNavModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Menu</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Nav className="flex-column">
+              {currentUser ? loggedInNav() : loggedOutNav()}
             </Nav>
-          {/* </Col> */}
-        {/* </div> */}
-      {/* </Container> */}
+          </Modal.Body>
+        </Modal>
+      </Navbar.Collapse>
+
     </Navbar>
 
   )

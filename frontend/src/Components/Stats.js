@@ -47,7 +47,7 @@ const Stats = ({formatDateTime}) => {
 
   const { weatherData } = useContext(UserContext);
   const uvindex = weatherData.currentConditions.uvindex;
-  let index = uvIndex(uvindex);
+  const index = uvIndex(uvindex);
 
   // const currTime = formatDateTime(weatherData, "datetime")[0];
   // const sunrise = formatDateTime(weatherData, "sunrise")[0];

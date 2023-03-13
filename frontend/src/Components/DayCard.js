@@ -7,7 +7,7 @@ const DayCard = ({ icon, tempMax, tempMin, precip, date, onClick, isSelected }) 
   return (
     <>
       <Card
-        className={`me-3 shadow-lg m-auto d-flex align-items-center justify-content-center
+        className={`ms-3 me-3 shadow-lg m-auto d-flex align-items-center justify-content-center
           ${isSelected ? " border-primary" : ""}`}
         style={{ maxWidth: '200px', cursor: 'pointer', transition: 'transform 0.2s ease-in-out' }}
         onClick={onClick}

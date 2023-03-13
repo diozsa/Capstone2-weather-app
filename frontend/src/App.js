@@ -126,14 +126,26 @@ function App() {
     try {
       let data = await WeatherApi.getWeatherData(location);
       setWeatherData(data);
+      setAddress(data.resolvedAddress)
       console.log("Weather data in App", data)
       return { success: true };
     } catch (errors) {
       console.error("api failed", errors);
-      // return { success: false, errors };
       return setWeatherData(null);
     }
- 
+  }
+
+// Save location used in the NavBar
+  
+  async function saveAdd(data) {
+    try {
+      let res = await WeatherApi.save(data);
+      console.log('Saved address', res)
+      return { success: true };
+    } catch (error) {
+      console.error("api failed", error);
+      return {success: false}
+    }
   }
 
   if (!infoLoaded) return <LoadingSpinner />;
@@ -141,8 +153,14 @@ function App() {
   return (
     <Router>
       <UserContext.Provider
-        value={{ currentUser, setCurrentUser, weatherData, setWeatherData }}>
-        <NavBar logout={logout} login={login} signup={signup} search={search} />
+        value={{ currentUser, setCurrentUser, weatherData, setWeatherData, address }}>
+        <NavBar
+          logout={logout}
+          login={login}
+          signup={signup}
+          search={search}
+          saveAdd={saveAdd}
+        />
         <Container>
           <Routes>
             <Route path="/" element={<HomePage weatherData={weatherData} />} />
