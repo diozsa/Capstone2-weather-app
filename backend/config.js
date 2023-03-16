@@ -8,10 +8,10 @@ require("dotenv").config();
 //colored messages in the console
 require("colors");
 
-// for the final phase will use secrets.js
-const SECRET_KEY = process.env.SECRET_KEY || "secret-dev";
 // const { SECRET_key } = require("../secrets");
 // const SECRET_KEY = process.env.SECRET_KEY || SECRET_key;
+const SECRET_KEY = process.env.SECRET_KEY || "secret-dev";
+
 
 const { API_key } = require("../secrets");
 const API_KEY = process.env.API_KEY || API_key;
