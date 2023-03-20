@@ -13,9 +13,7 @@ const CurrentCard = ({time}) => {
 
   return (
     <Card
-      className="border-info border-2 shadow max-w-400 m-4 d-flex align-items-center justify-content-center bg-secondary bg-opacity-10"
-      // style={{maxWidth: "350px"}}
-    // style={{ width: '80%', maxWidth: '400px', margin: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      className="border-info border-2 shadow m-4 d-flex align-items-center justify-content-center bg-secondary bg-opacity-10"
     >
       <Row>
         <Col xs={4} className="d-flex flex-column align-items-center justify-content-center"
@@ -43,13 +41,6 @@ const CurrentCard = ({time}) => {
             </Card.Text>
           </Card.Body>
         </Col>
-        {/* <Col>
-          <ListGroup className="list-group-flush" style={{ textAlign: 'center' }}>
-            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-          </ListGroup>
-        </Col> */}
       </Row>
     </Card>
   )

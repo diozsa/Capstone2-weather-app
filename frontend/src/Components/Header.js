@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import UserContext from "../auth/UserContext";
 import Alert from "react-bootstrap/Alert"
+
 const Header = () => {
   const { weatherData } = useContext(UserContext);
   if (!weatherData) {

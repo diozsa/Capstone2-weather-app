@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, resolvePath } from "react-router-dom";
 import useLocalStorage from "./hooks/useLocalStorage";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -143,8 +143,30 @@ function App() {
       console.log('Saved address', res)
       return { success: true };
     } catch (error) {
-      console.error("api failed", error);
+      console.error("api failed: could not save address", error);
       return {success: false}
+    }
+  }
+
+  async function getAdds(username) {
+    try {
+      let res = await WeatherApi.getAddresses(username);
+      console.log("addresses in App.js", res)
+      return { success: true, addresses: res };
+    } catch (error) {
+      console.error("api failed: could not get address list", error);
+      return {success: false}
+    }
+  }
+
+  async function removeAdd(username, id) {
+    try {
+      let res = await WeatherApi.removeAddress(username, id);
+      console.log("Addresses  removed in App.js", res)
+      return { success: true };
+    } catch (error) {
+      console.error("api failed: could not remove address", error);
+      return { success: false }
     }
   }
 
@@ -160,6 +182,7 @@ function App() {
           signup={signup}
           search={search}
           saveAdd={saveAdd}
+          getAdds={getAdds}
         />
         <Container>
           <Routes>
@@ -167,12 +190,7 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Container>
-        {/* <Row
-          style={{ backgroundColor: 'lightBlue', height: '50px' }}>
-          <Col className=" d-flex align-items-center">
-            <p>Copyright © 2023 My Website</p>
-          </Col>
-        </Row> */}
+
         <Row className="fixed-bottom" style={{ backgroundColor: 'lightBlue' }}>
           <Col className="d-flex align-items-center justify-content-center">
             <p className="m-3">

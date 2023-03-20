@@ -50,6 +50,7 @@ class WeatherApi {
 
     return res.address;
   }
+
   /** Get all addresses saved by user */
 
   static async getAddresses(username) {
@@ -58,6 +59,15 @@ class WeatherApi {
     return res.addresses;
   }
 
+  /** Delete an address by username and id 
+   * returns { deleted: id }
+  */
+
+  static async removeAddress(username, id) {
+    const res = await this.request(`addresses/${username}/${id}`);
+
+    return res
+  }
   /** Fetch data from the external API */
 
   static async getWeatherData(location, unit="us") {

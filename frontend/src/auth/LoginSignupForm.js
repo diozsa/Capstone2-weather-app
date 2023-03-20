@@ -84,7 +84,9 @@ const LoginSignupForm = ({ login, signup, isLoginMode, toggleLoginMode }) => {
       <Button variant="secondary" onClick={toggleLoginMode}>
         
         {isLoginMode ? "Switch to Sign Up" : "Switch to Log In"}
-      </Button>
+        </Button>
+
+
       </div>
         {formErrors.length
           ? <Message type="danger" messages={formErrors} />

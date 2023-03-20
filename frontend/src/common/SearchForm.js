@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Message from "./Message";
+import searchIcon from '../icons/search.png'
+
 
 
 /** Search widget.
@@ -50,10 +52,8 @@ const SearchForm = ({ searchFor}) => {
     // <div className="d-flex flex-grow-1 justify-content-center align-items-center">
     <>
     <Form onSubmit={handleSubmit}>
-        {/* <Col md={6} lg={12}> */}
         <Form.Group className="d-flex align-items-center">
         <Form.Control
-          // style={{ width: "400px" }}
           placeholder="Search for a city, address or zip code"
           type="text"
           name="searchTerm"
@@ -66,22 +66,13 @@ const SearchForm = ({ searchFor}) => {
         <Button
           type="submit"
           variant="outline-secondary"
-          id="search-button"
-        >
-          Search
-          </Button>
-        </Form.Group>
-        {/* </Col> */}
-    </Form>
+            id="search-button"  
+          >
+          <img src={searchIcon} style={{ width: "25px" }} alt="Search Icon" />
+        </Button>
 
-      {/* 
-  /** error - not found alert     
-      {
-    formErrors.length
-    ? <Message type="danger" messages={formErrors} />
-    : null
-  } */}
-  
+        </Form.Group>
+        </Form>
     </>
     // </div>
   );
