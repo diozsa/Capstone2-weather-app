@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, resolvePath } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import useLocalStorage from "./hooks/useLocalStorage";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -162,7 +162,7 @@ function App() {
   async function removeAdd(username, id) {
     try {
       let res = await WeatherApi.removeAddress(username, id);
-      console.log("Addresses  removed in App.js", res)
+      console.log("Address removed in App.js", res)
       return { success: true };
     } catch (error) {
       console.error("api failed: could not remove address", error);
@@ -183,6 +183,7 @@ function App() {
           search={search}
           saveAdd={saveAdd}
           getAdds={getAdds}
+          removeAdd={removeAdd}
         />
         <Container>
           <Routes>
@@ -194,7 +195,8 @@ function App() {
         <Row className="fixed-bottom" style={{ backgroundColor: 'lightBlue' }}>
           <Col className="d-flex align-items-center justify-content-center">
             <p className="m-3">
-              Dan Iozsa © 2023 <a href="https://linkedin.com/in/diozsa" target="_blank">LinkedIn</a>
+              Dan Iozsa © 2023 <a href="https://linkedin.com/in/diozsa"
+                target="_blank" rel="noreferrer">LinkedIn</a>
             </p>
           </Col>
         </Row>

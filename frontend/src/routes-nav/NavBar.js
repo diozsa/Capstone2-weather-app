@@ -9,7 +9,7 @@ import SearchForm from "../common/SearchForm";
 import saveIcon from '../icons/pin.png';
 import loginIcon from '../icons/login.png';
 import logoutIcon from '../icons/logout.png';
-
+import deleteIcon from '../icons/delete.png'
 
 /** Navigation bar for site. Shows up on every page.
  *
@@ -19,7 +19,7 @@ import logoutIcon from '../icons/logout.png';
  * Rendered by App.
  */
 
-const NavBar = ({logout, login, signup, search, saveAdd, getAdds}) => {
+const NavBar = ({logout, login, signup, search, saveAdd, getAdds, removeAdd}) => {
   const { currentUser, address, weatherData } = useContext(UserContext);
   console.debug("Navigation", "currentUser=", currentUser);
 
@@ -39,7 +39,7 @@ const NavBar = ({logout, login, signup, search, saveAdd, getAdds}) => {
       }
     }
     fetchLocations();
-  }, [currentUser, savedLocation]);
+  }, [currentUser, savedLocation, getAdds]);
 
 // used for enabling the Save location button after a new search
   useEffect(() => {
@@ -80,7 +80,18 @@ const NavBar = ({logout, login, signup, search, saveAdd, getAdds}) => {
           {locationsToShow.map((location) => (
             <NavDropdown.Item
               key={location.id}
-              onClick={() => search(location.address)}>
+              onClick={() => search(location.address)}
+              onMouseEnter={(e) => e.currentTarget.querySelector('button').classList.remove('d-none')}
+              onMouseLeave={(e) => e.currentTarget.querySelector('button').classList.add('d-none')}            >
+              <button
+                className="btn btn-link d-none p-0 m-0"
+                style={{ transition: 'transform 0.2s ease-in-out' }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.15)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                onClick={() => removeAdd(currentUser, location.id)}
+              >
+                <img src={deleteIcon}  alt="Delete Icon" />
+              </button>
               {location.address}
             </NavDropdown.Item>
           ))}

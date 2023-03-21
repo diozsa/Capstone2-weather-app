@@ -64,7 +64,7 @@ class WeatherApi {
   */
 
   static async removeAddress(username, id) {
-    const res = await this.request(`addresses/${username}/${id}`);
+    const res = await this.request(`addresses/${username}/${id}`, {}, 'delete');
 
     return res
   }
@@ -73,8 +73,7 @@ class WeatherApi {
   static async getWeatherData(location, unit="us") {
     
     const res = await this.request(`api/data?location=${location}&unit=${unit}`);
-    console.log("Location in WeatherApi is ",location);
-    console.log("Result from external API is ", res);
+  
     return res;
   }
 
