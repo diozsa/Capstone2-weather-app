@@ -2,13 +2,12 @@ import React, { useContext } from "react";
 import UserContext from "../auth/UserContext";
 
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import icons from "../icons/icons";
 
 const CurrentCard = ({time}) => {
-  const { weatherData } = useContext(UserContext);
+  const { weatherData, unit } = useContext(UserContext);
   const icon = weatherData.currentConditions.icon;
 
   return (
@@ -17,11 +16,18 @@ const CurrentCard = ({time}) => {
     >
       <Row>
         <Col xs={4} className="d-flex flex-column align-items-center justify-content-center"
-        style ={{maxWidth:"60%"}}>
+        // style={{ MaxWidth: "60%" }}
+        >
           <Card.Img variant="top" src={icons[icon]}
-            style={{ margin: '0 auto', maxWidth: '80px' }} />
-          <Card.Text style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '40px' }}>
-            {Math.round(weatherData.currentConditions.temp) + "\xB0F"} 
+            // className={"mx-0"}
+            // style={{ margin: '0 auto', maxWidth: '80px' }}
+          />
+          <Card.Text
+            className={"text-center mx-3 fs-1"}
+          // style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '40px' }}
+          >
+            {Math.round(weatherData.currentConditions.temp)
+              + (unit === "us" ? "\xB0F" : "\xB0C")} 
           </Card.Text>
         </Col>
         <Col className="d-flex flex-column align-items-center justify-content-center" style={{ width: "60%" }}>
@@ -34,7 +40,9 @@ const CurrentCard = ({time}) => {
               {weatherData.currentConditions.conditions}
             </Card.Text>
             <Card.Text className="fs-5">
-              Feels like {Math.round(weatherData.currentConditions.feelslike) + "\xB0F"}
+              Feels like&nbsp;
+              {Math.round(weatherData.currentConditions.feelslike)}
+              {unit === "us" ? "\xB0F" : "\xB0C"}
             </Card.Text>
             <Card.Text className="text-muted fs-6" >
               (as of {time})

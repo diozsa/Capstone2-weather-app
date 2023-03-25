@@ -1,16 +1,41 @@
 import React, { useContext } from "react";
 import UserContext from "../auth/UserContext";
 import Alert from "react-bootstrap/Alert"
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Header = () => {
-  const { weatherData } = useContext(UserContext);
+  const { weatherData, search, address, unit, setUnit } = useContext(UserContext);
+
   if (!weatherData) {
     return <p className="lead fs-4 m-4">Location not found. Try another!</p>;
   }
+  console.log("Unit in Header is: ", unit)
 
   return (
     <>
-      <h1 className="display-6 m-3">{weatherData.resolvedAddress}</h1>
+      <Row>
+        <Col>
+          <h1 className="display-6 ms-3 mt-4">{weatherData.resolvedAddress}</h1>
+        </Col>
+        <Col className="d-flex justify-content-end align-items-start">
+          <button
+            className="btn btn-outline-primary mt-5 me-2 fs-5 "
+            // onClick={() => {
+            //   (unit === "us" ? setUnit("metric") : setUnit("us"));
+            //   search(address, unit);
+            // }}
+            onClick={() => {
+              search(address, unit).then(() => {
+                setUnit(unit === "us" ? "metric" : "us");
+              });
+            }}
+          >            
+            {"\xB0F"} / {"\xB0C"}
+          </button>
+        </Col>
+
+      </Row>
       <p className="lead fs-4 m-3">{weatherData.description}</p>
       {
         weatherData.alert.link

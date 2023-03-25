@@ -19,8 +19,8 @@ import deleteIcon from '../icons/delete.png'
  * Rendered by App.
  */
 
-const NavBar = ({logout, login, signup, search, saveAdd, getAdds, removeAdd}) => {
-  const { currentUser, address, weatherData } = useContext(UserContext);
+const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
+  const { currentUser, address, weatherData, search, unit } = useContext(UserContext);
   console.debug("Navigation", "currentUser=", currentUser);
 
   const [showModal, setShowModal] = useState(false);
@@ -34,7 +34,7 @@ const NavBar = ({logout, login, signup, search, saveAdd, getAdds, removeAdd}) =>
     async function fetchLocations() {
       const res = await getAdds(currentUser);
       if (res.success) {
-        console.log("*********** addresses", res)
+        // console.log("*********** addresses", res)
         setLocations(res.addresses);
       }
     }
@@ -79,18 +79,19 @@ const NavBar = ({logout, login, signup, search, saveAdd, getAdds, removeAdd}) =>
           {locations.length === 0 && '-- no locations yet --'}
           {locationsToShow.map((location) => (
             <NavDropdown.Item
+              className="d-flex align-items-center"
               key={location.id}
-              onClick={() => search(location.address)}
+              onClick={() => search(location.address, unit)}
               onMouseEnter={(e) => e.currentTarget.querySelector('button').classList.remove('d-none')}
               onMouseLeave={(e) => e.currentTarget.querySelector('button').classList.add('d-none')}            >
               <button
-                className="btn btn-link d-none p-0 m-0"
+                className="btn btn-link d-none p-0 m-0 me-1"
                 style={{ transition: 'transform 0.2s ease-in-out' }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.15)'}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.5)'}
                 onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 onClick={() => removeAdd(currentUser, location.id)}
               >
-                <img src={deleteIcon}  alt="Delete Icon" />
+                <img src={deleteIcon} style={{ width: "15px" }} alt="Delete Icon" />
               </button>
               {location.address}
             </NavDropdown.Item>
@@ -112,7 +113,7 @@ const NavBar = ({logout, login, signup, search, saveAdd, getAdds, removeAdd}) =>
               {locations.slice(5).map((location) => (
                 <NavDropdown.Item
                   key={location.id}
-                  onClick={() => search(location.address)}>
+                  onClick={() => search(location.address, unit)}>
                   {location.address}
                 </NavDropdown.Item>
               ))}
@@ -195,7 +196,7 @@ const NavBar = ({logout, login, signup, search, saveAdd, getAdds, removeAdd}) =>
 
       <div className=" d-flex align-items-center">
         <Navbar.Brand className="d-none d-md-block">Weather Forecast</Navbar.Brand>
-        <SearchForm searchFor={search} />
+        <SearchForm searchFor={search} unit={unit} />
       </div>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 

@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 
 const HourList = ({ formatDateTime, selectedDay }) => {
 
-  const { weatherData } = useContext(UserContext);
+  const { weatherData, unit } = useContext(UserContext);
   const dateString = weatherData.days[0].datetime;
   // const time = formatDateTime(weatherData.days[0].hours[0].datetime, dateString)[0];
 
@@ -26,7 +26,7 @@ const HourList = ({ formatDateTime, selectedDay }) => {
           <HourCard
             key={hour.datetime} // add a unique key prop
             icon={hour.icon}
-            temp={Math.round(hour.temp) + "\xB0F"}
+            temp={Math.round(hour.temp) + (unit === "us" ? "\xB0F" : "\xB0C")}
             hour={time}
           />
         );

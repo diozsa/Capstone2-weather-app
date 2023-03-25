@@ -7,8 +7,6 @@ import Col from "react-bootstrap/Col";
 import WeatherApi from "./api/api";
 import NavBar from "./routes-nav/NavBar";
 import HomePage from "./routes-nav/HomePage";
-
-// import "./App.css";
 import UserContext from "./auth/UserContext";
 import LoadingSpinner from "./common/LoadingSpinner";
 import { decodeToken } from "react-jwt";
@@ -31,6 +29,7 @@ function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [weatherData, setWeatherData] = useState(null);
   const [address, setAddress] = useState("");
+  const [unit, setUnit] = useState("us");
 
   // Gets username from token. Until a user is logged in and they have a token,
   // this should not run. It only needs to re-run when a user logs out, so
@@ -122,12 +121,14 @@ function App() {
 
 // Search function used in the SearchForm
 
-  async function search(location) {
+  async function search(location, unit) {
     try {
-      let data = await WeatherApi.getWeatherData(location);
+      let data = await WeatherApi.getWeatherData(location, unit);
       setWeatherData(data);
       setAddress(data.resolvedAddress)
       console.log("Weather data in App", data)
+      console.log("Unit in App is: ", unit);
+
       return { success: true };
     } catch (errors) {
       console.error("api failed", errors);
@@ -175,12 +176,11 @@ function App() {
   return (
     <Router>
       <UserContext.Provider
-        value={{ currentUser, setCurrentUser, weatherData, setWeatherData, address }}>
+        value={{ currentUser, weatherData, address, search, unit, setUnit }}>
         <NavBar
           logout={logout}
           login={login}
           signup={signup}
-          search={search}
           saveAdd={saveAdd}
           getAdds={getAdds}
           removeAdd={removeAdd}

@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 
 const DayList = ({ formatDateTime, onDayClick, selectedDay }) => {
 
-  const { weatherData } = useContext(UserContext);
+  const { weatherData, unit } = useContext(UserContext);
   // const timeString = weatherData.days[0].hours[0].datetime;
 
   const handleDayCardClick = (dayIndex) => {
@@ -22,8 +22,8 @@ const DayList = ({ formatDateTime, onDayClick, selectedDay }) => {
               key={day.datetime} 
               icon={day.icon}
               conditions={day.conditions}
-              tempMax={Math.round(day.tempmax) + "\xB0F"}
-              tempMin={Math.round(day.tempmin) + "\xB0F"}
+              tempMax={Math.round(day.tempmax) + (unit === "us" ? "\xB0F" : "\xB0C")}
+              tempMin={Math.round(day.tempmin) + (unit === "us" ? "\xB0F" : "\xB0C")}
               precip={day.precipprob}
               date={date}
               onClick={() => handleDayCardClick(index)}

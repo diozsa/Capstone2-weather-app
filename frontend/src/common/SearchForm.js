@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormGroup from "react-bootstrap/FormGroup";
-
 import Button from 'react-bootstrap/Button';
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Message from "./Message";
 import searchIcon from '../icons/search.png'
 
 
@@ -22,26 +16,35 @@ import searchIcon from '../icons/search.png'
  * { NavBar } -> SearchForm
  */
 
-const SearchForm = ({ searchFor}) => {
+const SearchForm = ({ searchFor, unit}) => {
   console.debug("SearchForm", "searchFor=", typeof searchFor);
 
   const [searchTerm, setsearchTerm] = useState('');
-  const [formErrors, setFormErrors] = useState([]);
+  // const [formErrors, setFormErrors] = useState([]);
 
 
   // const handleSubmit = (e) => {
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   // searchFor(searchTerm);
+  //   let result = await searchFor(searchTerm, unit);
+    
+  //   // if (result.success) {
+  //   //   setFormErrors([]);
+  //   //   setsearchTerm(searchTerm);
+  //   // }
+  //   // else {
+  //   //   setFormErrors(["Location not found"]);
+  //   //   setsearchTerm("");
+  //   // }
+  //   setsearchTerm("");
+
+  // }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // searchFor(searchTerm);
-    let result = await searchFor(searchTerm);
-    if (result.success) {
-      setFormErrors([]);
-      setsearchTerm(searchTerm);
-    }      
-    else {
-      setFormErrors(["Location not found"]);
-      setsearchTerm("");
-    }
+    searchFor(searchTerm, unit);
+    setsearchTerm("");
   }
 
   const handleChange = (e) => {
@@ -49,7 +52,6 @@ const SearchForm = ({ searchFor}) => {
   }
 
   return (
-    // <div className="d-flex flex-grow-1 justify-content-center align-items-center">
     <>
     <Form onSubmit={handleSubmit}>
         <Form.Group className="d-flex align-items-center">
@@ -74,7 +76,6 @@ const SearchForm = ({ searchFor}) => {
         </Form.Group>
         </Form>
     </>
-    // </div>
   );
 }
 

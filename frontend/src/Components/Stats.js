@@ -15,14 +15,14 @@ const Stats = ({formatDateTime}) => {
         return "mod";
       case (uvindex >= 6 && uvindex <= 8):
         return "high";
-      case (uvindex > 9):
+      case (uvindex >= 9):
         return "extreme";
       default:
         break;
     }
   }
 
-  const { weatherData } = useContext(UserContext);
+  const { weatherData, unit } = useContext(UserContext);
   const uvindex = weatherData.currentConditions.uvindex;
   const index = uvIndex(uvindex);
 
@@ -43,7 +43,8 @@ const Stats = ({formatDateTime}) => {
           <Row className="flex-nowrap">
             <StatCard
               txt="MaxTemp"
-              val={Math.round(weatherData.days[0].tempmax) + "\xB0F"}
+              val={Math.round(weatherData.days[0].tempmax)
+                + (unit === "us" ? "\xB0F" : "\xB0C")}
               icon="max-temp"
             />
             <StatCard
@@ -53,7 +54,8 @@ const Stats = ({formatDateTime}) => {
             />
             <StatCard
               txt="Wind"
-              val={Math.round(weatherData.currentConditions.windspeed) + " mph"}
+              val={Math.round(weatherData.currentConditions.windspeed)
+                + (unit === "us" ? " mph" : " kmh")}
               icon="wind"
             />
             <StatCard            
@@ -66,7 +68,8 @@ const Stats = ({formatDateTime}) => {
           <Row className="flex-nowrap pb-4" style={{ marginTop: "10px" }}>
             <StatCard
               txt="MinTemp"
-              val={Math.round(weatherData.days[0].tempmin) + "\xB0F"}
+              val={Math.round(weatherData.days[0].tempmin)
+                + (unit === "us" ? "\xB0F" : "\xB0C")}
               icon="min-temp"
             />
             <StatCard
@@ -76,7 +79,8 @@ const Stats = ({formatDateTime}) => {
             />
             <StatCard
               txt="Visibility"
-              val={weatherData.currentConditions.visibility + " mi"}
+              val={weatherData.currentConditions.visibility
+                + (unit === "us" ? " mi" : " km") }
               icon="visibility"
             />
             <StatCard
