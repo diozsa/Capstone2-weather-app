@@ -35,6 +35,7 @@ function App() {
   // this should not run. It only needs to re-run when a user logs out, so
   // the value of the token is a dependency for this effect.
 
+  console.log("Unit in the App: ", unit)
   useEffect(function getUsername() {
     console.debug("App useEffect getUsername", "token=", token);
 
@@ -121,13 +122,13 @@ function App() {
 
 // Search function used in the SearchForm
 
-  async function search(location, unit) {
+  async function search(location, _unit) {
     try {
-      let data = await WeatherApi.getWeatherData(location, unit);
+      let data = await WeatherApi.getWeatherData(location, _unit);
       setWeatherData(data);
       setAddress(data.resolvedAddress)
       console.log("Weather data in App", data)
-      console.log("Unit in App is: ", unit);
+      console.log("Unit in App/search is: ", _unit);
 
       return { success: true };
     } catch (errors) {

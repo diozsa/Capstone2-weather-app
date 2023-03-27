@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 
 const Header = () => {
   const { weatherData, search, address, unit, setUnit } = useContext(UserContext);
-
+console.log(" Unit in top of Header: ", unit)
   if (!weatherData) {
     return <p className="lead fs-4 m-4">Location not found. Try another!</p>;
   }
@@ -21,14 +21,16 @@ const Header = () => {
         <Col className="d-flex justify-content-end align-items-start">
           <button
             className="btn btn-outline-primary mt-5 me-2 fs-5 "
-            // onClick={() => {
-            //   (unit === "us" ? setUnit("metric") : setUnit("us"));
-            //   search(address, unit);
-            // }}
             onClick={() => {
-              search(address, unit).then(() => {
-                setUnit(unit === "us" ? "metric" : "us");
-              });
+              /* This version did not retrieve the correct state */
+
+              // search(address, unit).then(() => {
+              //   setUnit(unit === "us" ? "metric" : "us");
+              // });
+
+              const unitToUse = unit === "us" ? "metric" : "us"
+              search(address, unitToUse)
+                .then(() => {setUnit(unitToUse);});
             }}
           >            
             {"\xB0F"} / {"\xB0C"}
