@@ -1,12 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../auth/UserContext";
 import Alert from "react-bootstrap/Alert"
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+// const boldUS = <span className="fw-bold">{"\xB0F"}</span>;
+// const regUS = <span>{"\xB0F"}</span>;
+// const boldMetric = <span className="fw-bold">{"\xB0C"}</span>;
+// const regMetric = <span>{"\xB0C"}</span>;
+
 const Header = () => {
+  
   const { weatherData, search, address, unit, setUnit } = useContext(UserContext);
-console.log(" Unit in top of Header: ", unit)
+  // const [usButtonText] = useState(unit === "us" ? boldUS : regUS); //
+  // const [metricButtonText] = useState(unit === "us" ? regMetric : boldMetric); //
+
+  // useEffect(() => {
+  //   console.log("Header.useEffect[unit] - unit = " + unit);
+  //   search(address, unit)
+  // }, [address, unit]);
+
+// console.log(" Unit in top of Header: ", unit)
   if (!weatherData) {
     return <p className="lead fs-4 m-4">Location not found. Try another!</p>;
   }
@@ -20,20 +34,23 @@ console.log(" Unit in top of Header: ", unit)
         </Col>
         <Col className="d-flex justify-content-end align-items-start">
           <button
-            className="btn btn-outline-primary mt-5 me-2 fs-5 "
+            className="btn btn-outline-primary mt-5 me-2 fs-5"
             onClick={() => {
-              /* This version did not retrieve the correct state */
-
-              // search(address, unit).then(() => {
-              //   setUnit(unit === "us" ? "metric" : "us");
-              // });
-
+              /* This version did not retrieve the correct state
+              *
+              * search(address, unit).then(() => {
+              * setUnit(unit === "us" ? "metric" : "us");
+              * });              
+              */
               const unitToUse = unit === "us" ? "metric" : "us"
               search(address, unitToUse)
                 .then(() => {setUnit(unitToUse);});
+              // console.log("Header.unit.onClick - toggling unit...");
+              // setUnit(unit === "us" ? "metric" : "us");
             }}
           >            
             {"\xB0F"} / {"\xB0C"}
+            {/* {usButtonText} / {metricButtonText} */}
           </button>
         </Col>
 

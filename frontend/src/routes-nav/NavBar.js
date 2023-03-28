@@ -10,6 +10,8 @@ import saveIcon from '../icons/pin.png';
 import loginIcon from '../icons/login.png';
 import logoutIcon from '../icons/logout.png';
 import deleteIcon from '../icons/delete.png'
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 /** Navigation bar for site. Shows up on every page.
  *
@@ -30,17 +32,18 @@ const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
   const [savedLocation, setSavedLocation] = useState(false);
 
 // gets all saved locations for logged in user
-  useEffect(() => {
-    async function fetchLocations() {
-      const res = await getAdds(currentUser);
-      if (res.success) {
-        // console.log("*********** addresses", res)
-        setLocations(res.addresses);
+    useEffect(() => {
+      async function fetchLocations() {
+        let res = [];
+        if(currentUser) res = await getAdds(currentUser);        
+        if (res.success) {
+          console.log("*********** addresses", res)
+          setLocations(res.addresses);
+        }
       }
-    }
-    fetchLocations();
-  }, [currentUser, savedLocation, getAdds]);
-
+      fetchLocations();
+    }, [currentUser, savedLocation, getAdds]);
+  
 // used for enabling the Save location button after a new search
   useEffect(() => {
     setSavedLocation(false);
@@ -66,7 +69,7 @@ const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
   
   function loggedInNav() {
     // Limit locations fixed list to first 5
-    // remaining locatoins in the list will be scrolled in window
+    // remaining locations in the list will be scrolled in window
     const locationsToShow = locations.slice(0, 5);
 
     return (
@@ -192,12 +195,17 @@ const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
 
   return (
     <Navbar style={{ backgroundColor: 'lightBlue', height: '70px' }}
-      variant="light" className="justify-content-between px-5" expand="lg">
+      variant="light" className="justify-content-between px-3" expand="lg">
 
-      <div className=" d-flex align-items-center">
-        <Navbar.Brand className="d-none d-md-block">Weather Forecast</Navbar.Brand>
-        <SearchForm searchFor={search} unit={unit} />
-      </div>
+      <Row className=" d-flex align-items-center">
+        <Col sm={3}>
+          <Navbar.Brand className="d-none d-md-block pe-5">Weather Forecast</Navbar.Brand>
+        </Col>
+        <Col xs={11} sm={12} md={8} lg={9} className="px-5">
+          <SearchForm  searchFor={search} unit={unit} />
+        </Col>
+      </Row>
+
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
       <Navbar.Collapse
@@ -208,8 +216,8 @@ const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
       <Nav className="justify-content-end">
         {currentUser ? loggedInNav() : loggedOutNav()}
       </Nav>
-        
-      </Navbar.Collapse>
+          </Navbar.Collapse>
+
 
     </Navbar>
   )

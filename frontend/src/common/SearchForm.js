@@ -62,15 +62,15 @@ const SearchForm = ({ searchFor, unit}) => {
           value={searchTerm}
           onChange={handleChange}
             required
-            style={{ minWidth: "290px", width: "100%" }}
+            // style={{ minWidth: "290px", width: "100%" }}
             className="form-control-md"
         />
         <Button
           type="submit"
           variant="outline-secondary"
-            id="search-button"  
+          id="search-button"  
           >
-          <img src={searchIcon} style={{ width: "25px" }} alt="Search Icon" />
+          <img src={searchIcon} style={{ width: "20px" }} alt="Search Icon" />
         </Button>
 
         </Form.Group>
