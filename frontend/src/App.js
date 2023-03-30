@@ -35,20 +35,18 @@ function App() {
   // this should not run. It only needs to re-run when a user logs out, so
   // the value of the token is a dependency for this effect.
 
-  console.log("Unit in the App: ", unit)
   useEffect(function getUsername() {
-    console.debug("App useEffect getUsername", "token=", token);
+    // console.debug("App useEffect getUsername", "token=", token);
 
     async function getCurrentUser() {
       if (token) {
         try {
-          console.log(token);
           let { username } = decodeToken(token);
           // puts token on the Api class so it can use it to call the API.
           WeatherApi.token = token;
           setCurrentUser(username);
         } catch (err) {
-          console.error("App getUsername: problem loading", err);
+          // console.error("App getUsername: problem loading", err);
           setCurrentUser(null);
         }
       }
@@ -81,7 +79,7 @@ function App() {
       setToken(token);
       return { success: true };
     } catch (errors) {
-      console.error("signup failed", errors);
+      // console.error("signup failed", errors);
       return { success: false, errors };
     }
   }
@@ -97,7 +95,7 @@ function App() {
       setToken(token);
       return { success: true };
     } catch (errors) {
-      console.error("login failed", errors);
+      // console.error("login failed", errors);
       return { success: false, errors };
     }
   }
@@ -111,7 +109,6 @@ function App() {
         const location = await getGeoLocation();
         await search(location);
       } catch (error) {
-        console.log("Geolocation error:", error);
         await search("Delhi");
       }
       setInfoLoaded(true);
@@ -127,12 +124,9 @@ function App() {
       let data = await WeatherApi.getWeatherData(location, _unit);
       setWeatherData(data);
       setAddress(data.resolvedAddress)
-      console.log("Weather data in App", data)
-      console.log("Unit in App/search is: ", _unit);
-
       return { success: true };
     } catch (errors) {
-      console.error("api failed", errors);
+      // console.error("api failed", errors);
       return setWeatherData(null);
     }
   }
@@ -141,11 +135,10 @@ function App() {
   
   async function saveAdd(data) {
     try {
-      let res = await WeatherApi.save(data);
-      console.log('Saved address', res)
+      await WeatherApi.save(data);
       return { success: true };
     } catch (error) {
-      console.error("api failed: could not save address", error);
+      // console.error("api failed: could not save address", error);
       return {success: false}
     }
   }
@@ -153,21 +146,19 @@ function App() {
   async function getAdds(username) {
     try {
       let res = await WeatherApi.getAddresses(username);
-      console.log("addresses in App.js", res)
       return { success: true, addresses: res };
     } catch (error) {
-      console.error("api failed: could not get address list", error);
+      // console.error("api failed: could not get address list", error);
       return {success: false}
     }
   }
 
   async function removeAdd(username, id) {
     try {
-      let res = await WeatherApi.removeAddress(username, id);
-      console.log("Address removed in App.js", res)
+      await WeatherApi.removeAddress(username, id);
       return { success: true };
     } catch (error) {
-      console.error("api failed: could not remove address", error);
+      // console.error("api failed: could not remove address", error);
       return { success: false }
     }
   }

@@ -1,5 +1,4 @@
-import React, {useContext} from "react";
-import UserContext from "../auth/UserContext";
+import React from "react";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
@@ -7,15 +6,11 @@ import Col from 'react-bootstrap/Col';
 import icons from "../icons/icons";
 
 const StatCard = ({ txt, val, icon }) => {
-  // const { weatherData } = useContext(UserContext);
-  // const icon = weatherData.currentConditions.icon;
-
 
   return (
     <Card
       className="shadow border-info m-auto d-flex align-items-center justify-content-center"
       style={{ minWidth: "200px", maxWidth: '210px'}}
-      // style={{ width: '70%', minHeight: "80px", minWidth: "210px", maxWidth: '210px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
       <Row>
         <Col xs={4} className="d-flex flex-column align-items-center justify-content-center"

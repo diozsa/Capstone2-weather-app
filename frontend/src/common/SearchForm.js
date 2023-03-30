@@ -17,29 +17,9 @@ import searchIcon from '../icons/search.png'
  */
 
 const SearchForm = ({ searchFor, unit}) => {
-  console.debug("SearchForm", "searchFor=", typeof searchFor);
+  // console.debug("SearchForm", "searchFor=", typeof searchFor);
 
   const [searchTerm, setsearchTerm] = useState('');
-  // const [formErrors, setFormErrors] = useState([]);
-
-
-  // const handleSubmit = (e) => {
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   // searchFor(searchTerm);
-  //   let result = await searchFor(searchTerm, unit);
-    
-  //   // if (result.success) {
-  //   //   setFormErrors([]);
-  //   //   setsearchTerm(searchTerm);
-  //   // }
-  //   // else {
-  //   //   setFormErrors(["Location not found"]);
-  //   //   setsearchTerm("");
-  //   // }
-  //   setsearchTerm("");
-
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();

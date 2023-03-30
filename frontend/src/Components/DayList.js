@@ -6,7 +6,6 @@ import Row from "react-bootstrap/Row";
 const DayList = ({ formatDateTime, onDayClick, selectedDay }) => {
 
   const { weatherData, unit } = useContext(UserContext);
-  // const timeString = weatherData.days[0].hours[0].datetime;
 
   const handleDayCardClick = (dayIndex) => {
     onDayClick(dayIndex);

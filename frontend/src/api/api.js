@@ -9,7 +9,7 @@ class WeatherApi {
   static token;
 
   static async request(endpoint, data = {}, method = "get") {
-    console.debug("API Call:", BASE_URL, endpoint, data, method);
+    // console.debug("API Call:", BASE_URL, endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${WeatherApi.token}` };
@@ -18,7 +18,7 @@ class WeatherApi {
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
-      console.error("API Error:", err.response);
+      // console.error("API Error:", err.response);
 
       let message = err.response.data.error.message;
       throw Array.isArray(message) ? message : [message];

@@ -16,16 +16,9 @@ const CurrentCard = ({time}) => {
     >
       <Row>
         <Col xs={4} className="d-flex flex-column align-items-center justify-content-center"
-        // style={{ MaxWidth: "60%" }}
         >
-          <Card.Img variant="top" src={icons[icon]}
-            // className={"mx-0"}
-            // style={{ margin: '0 auto', maxWidth: '80px' }}
-          />
-          <Card.Text
-            className={"text-center mx-3 fs-1"}
-          // style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '40px' }}
-          >
+          <Card.Img variant="top" src={icons[icon]}/>
+          <Card.Text className={"text-center mx-3 fs-1"}>
             {Math.round(weatherData.currentConditions.temp)
               + (unit === "us" ? "\xB0F" : "\xB0C")} 
           </Card.Text>

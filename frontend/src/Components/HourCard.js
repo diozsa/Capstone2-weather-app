@@ -9,16 +9,9 @@ const HourCard = ({icon, temp, hour}) => {
       <Card
         className="me-2 shadow-lg border-0 m-auto d-flex align-items-center justify-content-center"
         style={{maxWidth: '130px' }}
-
-      // style={{ width: '18rem' }}
       >
-        <Card.Img variant="top" src={icons[icon]}
-          style={{ maxWidth: '70px' }}
-/>
-      {/* <Card.Body>
-          <Card.Title>{temp}</Card.Title>
-          <Card.Text>{hour}</Card.Text>
-      </Card.Body> */}
+        <Card.Img variant="top" src={icons[icon]} style={{ maxWidth: '70px' }} />
+
         <ListGroup className="list-group-flush d-flex align-items-center justify-content-center">
           <ListGroup.Item className="fs-4">{temp}</ListGroup.Item>
           <ListGroup.Item>{hour}</ListGroup.Item>

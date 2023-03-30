@@ -7,16 +7,8 @@ const HourList = ({ formatDateTime, selectedDay }) => {
 
   const { weatherData, unit } = useContext(UserContext);
   const dateString = weatherData.days[0].datetime;
-  // const time = formatDateTime(weatherData.days[0].hours[0].datetime, dateString)[0];
-
 
   return (
-    // <HourCard
-    //   icon={weatherData.days[0].hours[0].icon}
-    //   temp={Math.round(weatherData.days[0].hours[0].temp) + "\xB0F"}
-    //   hour={time}
-    // />
-
     <>
       <Row className="flex-nowrap overflow-auto py-4 mx-3">
       {weatherData.days[selectedDay].hours.map(hour => {

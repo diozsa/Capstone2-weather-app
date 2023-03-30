@@ -23,7 +23,7 @@ import Col from "react-bootstrap/Col";
 
 const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
   const { currentUser, address, weatherData, search, unit } = useContext(UserContext);
-  console.debug("Navigation", "currentUser=", currentUser);
+  // console.debug("Navigation", "currentUser=", currentUser);
 
   const [showModal, setShowModal] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -37,7 +37,7 @@ const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
         let res = [];
         if(currentUser) res = await getAdds(currentUser);        
         if (res.success) {
-          console.log("*********** addresses", res)
+          // console.log("*********** addresses", res)
           setLocations(res.addresses);
         }
       }
@@ -199,7 +199,9 @@ const NavBar = ({logout, login, signup, saveAdd, getAdds, removeAdd}) => {
 
       <Row className=" d-flex align-items-center">
         <Col sm={3}>
-          <Navbar.Brand className="d-none d-md-block pe-5">Weather Forecast</Navbar.Brand>
+          <Navbar.Brand className="d-none d-md-block pe-5">
+            Weather Forecast
+          </Navbar.Brand>
         </Col>
         <Col xs={11} sm={12} md={8} lg={9} className="px-5">
           <SearchForm  searchFor={search} unit={unit} />
