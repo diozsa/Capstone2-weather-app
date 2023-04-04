@@ -17,6 +17,7 @@ This web-app provides weather forecast information based on location provided by
 - Geolocation on initial load. The app retrieves browser's location based on the public user IP.
 - Renders current weather conditions, 24 hr forecast and 15 days forecast.
 - Option to save, retrieve and delete saved locations for logged in users.
+- Logged in user can save/ retrieve/ delete locations.
 - Imperial to metric data selector.
 - Form data validation
 - JSON schema validation
